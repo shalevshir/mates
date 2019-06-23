@@ -1,15 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import Nevigation from './components/Nevigtion'
+import MainWindow from './components/MainWindow'
 import './App.css';
 
-function App() {
 
+class App extends React.Component {
+  state= {
+    section:'flatmates'
+  }
+  onSectionChange(section){
+    this.setState({section})
+  }
 
-  return (
+  render (){
+    return(
     <div className="App">
-        
+      <Nevigation handleChange={this.onSectionChange}/>
+      <MainWindow section={this.state.section}/>
     </div>
   );
+  }
 }
 
 export default App;
