@@ -1,9 +1,8 @@
 import React from 'react'
 
 const GroceriesItem = (props) =>{
-    console.log('test')
     return(
-        <p>{props.item}</p>
+        <p key={props.item.id}>{props.item.product} <button>קניתי</button></p>
     )
     
 }

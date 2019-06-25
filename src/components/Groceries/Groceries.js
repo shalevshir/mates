@@ -3,7 +3,18 @@ import GroceriesList from './GroceriesList'
 
 class Groceries extends Component {
     state={
-        groceriesList:['milk','coffe']
+        groceriesList:[
+            {
+                product:'milk',
+                id:'123',
+                isBought:false
+            },
+            {
+                product:'cofee',
+                id:'456',
+                isBought:false
+            }
+        ]
     }
     render(){
         return(

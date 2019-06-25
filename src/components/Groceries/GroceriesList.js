@@ -3,9 +3,8 @@ import GroceriesItem from './GroceriesItem'
 
 class GroceriesList extends React.Component{
     render(){
-        console.log('render list', this.props.list)
         return(
-            this.props.list.every((product)=>{
+            this.props.list.map((product)=>{
                 return <GroceriesItem item={product}/>
             })
         )

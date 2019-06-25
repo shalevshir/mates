@@ -6,7 +6,7 @@ import './App.css';
 
 class App extends React.Component {
   state= {
-    section:'flatmates'
+    section:'groceries'
   }
   onSectionChange(section){
     this.setState({section:section})
