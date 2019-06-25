@@ -1,21 +1,30 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Bills from './Bills'
 import Flatmates from './Flatmates'
-import Groceries from './Groceries'
+import Groceries from './Groceries/Groceries'
 
 
 class MainWindow extends React.Component{
 
     render(){
-        if(this.props.section === 'flatmates'){
-            return(
-                <Flatmates/>
-            )
-        }else if(this.props.section === 'bills'){
-            return(
-                <Bills/>
-            )
+        switch (this.props.section) {
+            case 'flatmates':
+                return <Flatmates/>
+            case 'bills':
+                return <Bills/>
+            case 'groceries':
+                return <Groceries/>
+            
+            default:
+                break;
         }
+        // if(this.props.section === 'flatmates'){
+            
+        // }else if(this.props.section === 'bills'){
+        //     return(
+        //         <Bills/>
+        //     )
+        // }
     }
 }
 
