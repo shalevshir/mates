@@ -9,13 +9,13 @@ class App extends React.Component {
     section:'flatmates'
   }
   onSectionChange(section){
-    this.setState({section})
+    this.setState({section:section})
   }
 
   render (){
     return(
     <div className="App">
-      <Nevigation handleChange={this.onSectionChange}/>
+      <Nevigation handleChange={this.onSectionChange.bind(this)}/>
       <MainWindow section={this.state.section}/>
     </div>
   );
