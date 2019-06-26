@@ -7,7 +7,7 @@ class Groceries extends Component {
             {
                 product:'milk',
                 id:'123',
-                isBought:false
+                isBought:true
             },
             {
                 product:'coffee',
@@ -16,10 +16,18 @@ class Groceries extends Component {
             }
         ]
     }
+    handleBuying(id){
+        const item = this.state.groceriesList.find((product =>{
+            return product.id === id
+        }))
+        item.isBought=true
+        this.setState({item})
+    }
+
     render(){
         return(
             <div>
-                <GroceriesList list={this.state.groceriesList}/>
+                <GroceriesList list={this.state.groceriesList} handleBuying={this.handleBuying.bind(this)}/>
             </div>
         )
     }

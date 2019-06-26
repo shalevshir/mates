@@ -5,7 +5,7 @@ class GroceriesList extends React.Component{
     render(){
         return(
             this.props.list.map((product)=>{
-                return <GroceriesItem item={product}/>
+                return <GroceriesItem key= {product.id} item={product} handleBuying={this.props.handleBuying}/>
             })
         )
     }
