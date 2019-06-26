@@ -10,7 +10,7 @@ class Groceries extends Component {
                 isBought:false
             },
             {
-                product:'cofee',
+                product:'coffee',
                 id:'456',
                 isBought:false
             }

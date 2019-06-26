@@ -5,11 +5,15 @@ import './App.css';
 
 
 class App extends React.Component {
-  state= {
-    section:'groceries'
+  constructor(props){
+    super(props)
+    this.state = {
+      section: 'groceries'
+    }
   }
+  
   onSectionChange(section){
-    this.setState({section:section})
+    this.setState({section: section})
   }
 
   render (){
