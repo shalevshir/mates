@@ -30,17 +30,23 @@ class Groceries extends Component {
     this.setState({modalIsOpen: true});
   }
  
-
- 
   closeModal() {
     this.setState({modalIsOpen: false});
+  }
+  addGrocerySubmit(input){
+        const newGrocery ={
+            product:input,
+            id:'789',
+            isBought:false
+        }
+        this.setState({groceriesList:[...this.state.groceriesList, newGrocery], modalIsOpen:false})
   }
  
 
     render(){
         return(
             <div>
-                <AddGrocerie modalIsOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)} />
+                <AddGrocerie modalIsOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)} addGrocerySubmit={this.addGrocerySubmit.bind(this)} />
                 <GroceriesList list={this.state.groceriesList} handleBuying={this.handleBuying.bind(this)}/>
                 <button onClick={this.openModal.bind(this)}>Add</button>
             </div>
