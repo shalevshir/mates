@@ -1,12 +1,13 @@
 import React from 'react'
 
-const styleBought={
-        color:'red'
-}
+
 const GroceriesItem = (props) =>{
     return(
-        <p style={props.item.isBought?styleBought:null}>{props.item.product}
-        <button onClick={()=>props.handleBuying(props.item.id)}>קניתי</button></p>
+        <div className="flex items-center ml6 pl5">
+            <input className="mr3 mt1" type="checkbox" checked={props.item.isBought} id={props.item.id} value={props.item.product} onChange={()=>{props.handleBuying(props.item.id)}}/>
+            <label className={props.item.isBought?'strike ':null}>{props.item.product}</label>
+        </div>
+
     )
     
 }

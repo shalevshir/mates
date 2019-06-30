@@ -18,11 +18,11 @@ class Groceries extends Component {
         ],
         modalIsOpen:false
     }
-    handleBuying(id){
+    handleCheck(id){
         const item = this.state.groceriesList.find((product =>{
             return product.id === id
         }))
-        item.isBought=true
+        item.isBought=!item.isBought
         this.setState({item})
     }
     
@@ -47,7 +47,7 @@ class Groceries extends Component {
         return(
             <div>
                 <AddGrocerie modalIsOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)} addGrocerySubmit={this.addGrocerySubmit.bind(this)} />
-                <GroceriesList list={this.state.groceriesList} handleBuying={this.handleBuying.bind(this)}/>
+                <GroceriesList list={this.state.groceriesList} handleBuying={this.handleCheck.bind(this)}/>
                 <button onClick={this.openModal.bind(this)}>Add</button>
             </div>
         )

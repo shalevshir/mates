@@ -21,7 +21,7 @@ class AddGroceries extends React.Component {
             isOpen={this.props.modalIsOpen}
             onRequestClose={this.props.closeModal}
             style={customStyles}
-            contentLabel="Example Modal"
+            contentLabel="Add Grocery Modal"
             >
             <article className="pa4 black-80">
             <button className="b input-reset ba b--black bg-transparent grow pointer " onClick={this.props.closeModal} >X</button>
