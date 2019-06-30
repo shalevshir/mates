@@ -1,6 +1,6 @@
 import React from 'react';
 import Bills from './Bills'
-import Flatmates from './Flatmates'
+import Flatmates from './Flatmates/Flatmates'
 import Groceries from './Groceries/Groceries'
 
 
@@ -16,7 +16,7 @@ class MainWindow extends React.Component{
                 return <Groceries/>
             
             default:
-                break;
+                return <Flatmates/>;
         }
         // if(this.props.section === 'flatmates'){
             
