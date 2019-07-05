@@ -1,5 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
+import * as actionType from '../../store/actions'
+import { connect } from 'react-redux'
  
 const customStyles = {
   content : {
@@ -26,7 +28,7 @@ class AddGroceries extends React.Component {
             <article className="pa4 black-80">
             <button className="b input-reset ba b--black bg-transparent grow pointer " onClick={this.props.closeModal} >X</button>
             <form onSubmit ={(e)=>{e.preventDefault()
-                this.props.addGrocerySubmit(e.target.grocery.value)}}>
+                this.props.onAdd(e.target.grocery.value,this.props.closeModal)}}>
                 <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                 <legend className="ph0 mh0 fw6 clip">Add Grocery</legend>
                 <div className="mt3">
@@ -44,4 +46,17 @@ class AddGroceries extends React.Component {
         }
 }
 
-export default AddGroceries
+const mapDispatchToProps = dispatch =>{
+  return {
+    onAdd: (input, close)=>{
+      if(input === ''){
+        alert('Please enter a grocery name') 
+        return;
+      }
+      close()
+      return dispatch({type:actionType.ADD_GROCERY,input})
+    }
+  }
+}
+
+export default connect(null,mapDispatchToProps)(AddGroceries)

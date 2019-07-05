@@ -4,9 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import reducer from './store/reducer'
+import billsReducer from './store/billsReducer'
+import flatReducer from './store/flatReducer'
+
+const reducer = combineReducers({bills:billsReducer,flat:flatReducer})
 const store = createStore(reducer)
 
 ReactDOM.render(<Provider store ={store}><App /></Provider>, document.getElementById('root'));

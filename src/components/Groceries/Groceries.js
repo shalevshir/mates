@@ -1,29 +1,13 @@
 import React, {Component} from 'react'
 import GroceriesList from './GroceriesList'
+import GroceriesListBought from './GroceriesListBought'
 import AddGrocerie from './AddGrocerie'
+import * as actionsType from '../../store/actions'
+import {connect} from 'react-redux'
 
 class Groceries extends Component {
     state={
-        groceriesList:[
-            {
-                product:'milk',
-                id:'123',
-                isBought:true
-            },
-            {
-                product:'coffee',
-                id:'456',
-                isBought:false
-            }
-        ],
         modalIsOpen:false
-    }
-    handleCheck(id){
-        const item = this.state.groceriesList.find((product =>{
-            return product.id === id
-        }))
-        item.isBought=!item.isBought
-        this.setState({item})
     }
     
   openModal() {
@@ -33,24 +17,35 @@ class Groceries extends Component {
   closeModal() {
     this.setState({modalIsOpen: false});
   }
-  addGrocerySubmit(input){
-        const newGrocery ={
-            product:input,
-            id:'789',
-            isBought:false
-        }
-        this.setState({groceriesList:[...this.state.groceriesList, newGrocery], modalIsOpen:false})
-  }
+  
  
 
     render(){
         return(
             <div>
-                <AddGrocerie modalIsOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)} addGrocerySubmit={this.addGrocerySubmit.bind(this)} />
-                <GroceriesList list={this.state.groceriesList} handleBuying={this.handleCheck.bind(this)}/>
+                <AddGrocerie modalIsOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)}  />
+                <GroceriesList/>
+                <hr className='ma0 pa0-ns'></hr>
+                <GroceriesListBought list={this.state.groceriesList}/>
                 <button onClick={this.openModal.bind(this)}>Add</button>
             </div>
         )
     }
 }
-export default Groceries
+
+const mapStateToProps = (state) =>{
+    return {
+        flatName:state.flat.name,
+        mates:state.flat.mates,
+        groceriesList:state.flat.groceriesList,
+        _id:state.flat._id
+    }
+}
+
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        onCheck: (id)=> dispatch({type:actionsType.CHECK_ITEM, id:id})
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Groceries)

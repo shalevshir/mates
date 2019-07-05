@@ -9,8 +9,8 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      section: '',
-      isSignedIn: false
+      section: 'groceries',
+      isSignedIn: true
     }
   }
   
@@ -26,7 +26,8 @@ class App extends React.Component {
   render (){
     return(
     <div className="App">
-    {this.state.isSignedIn?<div>
+    {this.state.isSignedIn?
+      <div>
       <Nevigation handleChange={this.onSectionChange.bind(this)}/>
       <MainWindow section={this.state.section}/></div>
     :<Signin onSignIn={this.onSignIn.bind(this)}/>
