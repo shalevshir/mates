@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import * as actionType from '../../store/actions'
+import * as actionsCreators from '../../store/actions/actionCreators'
 import { connect } from 'react-redux'
  
 const customStyles = {
@@ -54,7 +54,7 @@ const mapDispatchToProps = dispatch =>{
         return;
       }
       close()
-      return dispatch({type:actionType.ADD_GROCERY,input})
+      return dispatch(actionsCreators.addGrocery(input))
     }
   }
 }

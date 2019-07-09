@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import GroceriesList from './GroceriesList'
 import GroceriesListBought from './GroceriesListBought'
 import AddGrocerie from './AddGrocerie'
-import * as actionsType from '../../store/actions'
+import * as actionsCreators from '../../store/actions/actionCreators'
 import {connect} from 'react-redux'
 
 class Groceries extends Component {
@@ -45,7 +45,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = dispatch =>{
     return{
-        onCheck: (id)=> dispatch({type:actionsType.CHECK_ITEM, id:id})
+        onCheck: (id)=> dispatch(actionsCreators.checkItem(id))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Groceries)

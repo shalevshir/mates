@@ -1,6 +1,14 @@
 const initialState = {
-    test:'Bills Page',
-    count:0
+    bills:[
+        {   
+            expense:'elcricity',
+            amount:200
+        },
+        {
+            expense: 'water',
+            amount:100
+        }
+    ]
 }
 
 const billsReducer = (state = initialState, action)=>{

@@ -1,4 +1,4 @@
-import * as actionsTypes from './actions'
+import * as actionsTypes from './actions/actionsTypes'
 
 const intialState ={
     name:'frenkel',
@@ -24,21 +24,25 @@ const intialState ={
     ],
     _id:'qwe'
 }
+const checkItem = (state, action) =>{
+    
+    const newList = state.groceriesList.filter((product =>{
+        if(product.id === action.id){
+            product.isBought = !product.isBought
+            return product
+        }
+        return product
+    }))
+    return {...state,groceriesList:newList}
+}
 
 const flatReducer = (state = intialState, action)=>{
     switch (action.type) {
         case actionsTypes.CHECK_ITEM:
-            const newList = state.groceriesList.filter((product =>{
-                if(product.id === action.id){
-                    product.isBought = !product.isBought
-                    return product
-                }
-                return product
-            }))
-            return {...state,groceriesList:newList}
+            return checkItem(state, action)
         case actionsTypes.ADD_GROCERY:
                 
-                const isDuplicate = state.groceriesList.find(el=>el.product===action.input)
+                const isDuplicate = state.groceriesList.find(el=>el.product===action.input||false)
                 if(isDuplicate){
                     const newList = state.groceriesList.filter(product=>{
                         if(product.product === action.input){

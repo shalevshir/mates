@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import * as actionsTypes from '../../store/actions'
+import * as actionsCreator from '../../store/actions/actionCreators'
 
 const GroceriesItem = (props) =>{
     return(
@@ -15,7 +15,7 @@ const GroceriesItem = (props) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        onCheck: (id)=> dispatch({type:actionsTypes.CHECK_ITEM, id:id})
+        onCheck: (id)=> dispatch(actionsCreator.checkItem(id))
     }
 }
 export default connect(null,mapDispatchToProps)(GroceriesItem)
