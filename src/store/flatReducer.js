@@ -4,9 +4,11 @@ const intialState ={
     name:'frenkel',
     mates:[
         {
+            name:'Shalev',
             _id:'123',
         },
         {
+            name:'Ofer',
             _id:'456'
         }
     ],
@@ -22,7 +24,22 @@ const intialState ={
             isBought:false
         }
     ],
-    _id:'qwe'
+    bills:[
+        {
+            billType:'electric',
+            amount:200,
+            paidBy:'123',
+            _id:'bill1'
+        },
+        {
+            billType:'groceries',
+            amount:152,
+            paidBy:'456',
+            _id:'bill2'
+        }
+    ],
+
+    _id:'qwe345dfn6yu8'
 }
 const checkItem = (state, action) =>{
     
@@ -41,7 +58,6 @@ const flatReducer = (state = intialState, action)=>{
         case actionsTypes.CHECK_ITEM:
             return checkItem(state, action)
         case actionsTypes.ADD_GROCERY:
-                
                 const isDuplicate = state.groceriesList.find(el=>el.product===action.input||false)
                 if(isDuplicate){
                     const newList = state.groceriesList.filter(product=>{
