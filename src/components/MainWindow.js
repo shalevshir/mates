@@ -2,6 +2,7 @@ import React from 'react';
 import Bills from './Bills'
 import Flatmates from './Flatmates/Flatmates'
 import Groceries from './Groceries/Groceries'
+import PinBoard from './PinBoard/PinBoard'
 
 
 class MainWindow extends React.Component{
@@ -14,7 +15,8 @@ class MainWindow extends React.Component{
                 return <Bills/>
             case 'groceries':
                 return <Groceries/>
-            
+            case 'pinboard':
+                return <PinBoard/>
             default:
                 return <Flatmates/>;
         }
