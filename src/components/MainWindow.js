@@ -1,5 +1,5 @@
 import React from 'react';
-import Bills from './Bills'
+import Bills from './Bills/Bills'
 import Flatmates from './Flatmates/Flatmates'
 import Groceries from './Groceries/Groceries'
 import PinBoard from './PinBoard/PinBoard'

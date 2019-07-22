@@ -20,7 +20,6 @@ class GroceriesListBought extends React.Component{
 
 
 const mapStateToProps = (state) =>{
-    console.log(state)
     return{
         list:state.flat.groceriesList
     }

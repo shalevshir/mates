@@ -1,7 +1,7 @@
 import React from 'react'
 import GroceriesItem from './GroceriesItem'
 import {connect} from 'react-redux'
-import * as actionTypes from '../../store/actions'
+import * as actionTypes from '../../store/actions/actionsTypes'
 
 const GroceriesList = props =>{
     return(
@@ -19,7 +19,6 @@ const GroceriesList = props =>{
 }
 
 const mapStateToProps = (state) =>{
-    console.log(state)
     return{
         list:state.flat.groceriesList
     }

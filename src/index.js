@@ -1,16 +1,20 @@
+import './index.css';
+import 'tachyons';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'tachyons';
-import { createStore, combineReducers } from 'redux'
+
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+
 import billsReducer from './store/billsReducer'
 import flatReducer from './store/flatReducer'
 
 const reducer = combineReducers({bills:billsReducer,flat:flatReducer})
-const store = createStore(reducer)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(<Provider store ={store}><App /></Provider>, document.getElementById('root'));
 
