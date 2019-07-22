@@ -9,29 +9,36 @@ class PinBoard extends React.Component {
                     body: 'screen shot from facebook',
                     id: '123',
                     date: new Date(),
-                    mate: 'Shalev'
+                    mate: 'Shalev',
+                    showPost: true
                 },
                 {
                     title: 'party tonight',
                     body: 'post',
                     id: '456',
                     date: new Date(),
-                    mate: 'Ofer'
+                    mate: 'Ofer',
+                    showPost: true
                 },
                 {
                     title: 'party tonight',
                     body: 'text',
                     id: '125',
                     date: new Date(),
-                    mate: 'Ofer'
+                    mate: 'Ofer',
+                    showPost: true
                 }
         ]
     }
 
+    onRemovePin = (pin) => {
+        this.setState({showPost: false})
+    } 
+
     render(){
         return (
             <div>
-                <PinsList list={this.state.pinsList}/>
+                <PinsList list={this.state.pinsList} onRemovePin={this.onRemovePin.bind(this)}/>
             </div>
         )
     }
