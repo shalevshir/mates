@@ -3,12 +3,14 @@ import Pin from './Pin';
 
 const PinsList = (props) =>  {
     return (
-        <div>
+        <div className="flex flex-wrap">
             {props.list.map(pin => {
-                return <Pin pin={pin} key={pin.id}/>
+                return <Pin pin={pin} key={pin.id} onRemoveItem={this.props.onRemovePin(pin.id)}/>
             })}
         </div>
     )
 }
+
+
 
 export default PinsList;
