@@ -17,7 +17,7 @@ const Pin = (props) =>  {
                 <p className="f6 lh-copy measure mt2 mid-gray">{props.pin.body}</p>
             </div>
             <div>
-                <button className="b input-reset ba b--black bg-transparent grow pointer " onClick={this.props.onRemoveItem(props.pin.id)} >X</button>
+                <button className="b input-reset ba b--black bg-transparent grow pointer " onClick={props.onRemoveItem} >X</button>
             </div>
         </div>
         </article>

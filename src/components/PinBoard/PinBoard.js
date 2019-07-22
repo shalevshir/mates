@@ -10,7 +10,7 @@ class PinBoard extends React.Component {
                     id: '123',
                     date: new Date(),
                     mate: 'Shalev',
-                    showPost: true
+                    showPin: true
                 },
                 {
                     title: 'party tonight',
@@ -18,7 +18,7 @@ class PinBoard extends React.Component {
                     id: '456',
                     date: new Date(),
                     mate: 'Ofer',
-                    showPost: true
+                    showPin: true
                 },
                 {
                     title: 'party tonight',
@@ -26,19 +26,23 @@ class PinBoard extends React.Component {
                     id: '125',
                     date: new Date(),
                     mate: 'Ofer',
-                    showPost: true
+                    showPin: true
                 }
         ]
     }
 
-    onRemovePin = (pin) => {
-        this.setState({showPost: false})
+    onRemovePin = (id) => {
+        const pin = this.state.pinsList.find(pin => id === pin.id)
+        pin.showPin = !pin.showPin;
+        console.log(pin)
+        // const updatedList = [...]
+        // this.setState({showPin: false})
     } 
 
     render(){
         return (
             <div>
-                <PinsList list={this.state.pinsList} onRemovePin={this.onRemovePin.bind(this)}/>
+                <PinsList list={this.state.pinsList} onRemovePin={(pinId) =>this.onRemovePin(pinId)}/>
             </div>
         )
     }
