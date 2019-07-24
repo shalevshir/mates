@@ -2,7 +2,7 @@ import React from 'react';
 import Nevigation from './components/Nevigtion'
 import MainWindow from './components/MainWindow'
 import './App.css';
-import Signin from './components/Signin'
+import Signin from './components/Auth/Signin'
 
 
 class App extends React.Component {

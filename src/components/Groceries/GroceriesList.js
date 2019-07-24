@@ -1,28 +1,44 @@
 import React from 'react'
 import GroceriesItem from './GroceriesItem'
 import {connect} from 'react-redux'
-import * as actionTypes from '../../store/actions/actionsTypes'
+import * as actionTypes from '../../store/actions/actionTypes'
+import { initGroceries } from '../../store/actions/groceries'
 
-const GroceriesList = props =>{
-    return(
-        <fieldset id="ma5" className="bn ">
-        {
-            props.list.map((product)=>{
-            if(!product.isBought){
-                return <GroceriesItem key= {product.id} item={product}/>
+class GroceriesList extends React.Component{
+    componentDidMount(){
+        this.props.initGroceriesList()
+    }
+    render(){
+        return(
+            !this.props.list?<p>loading</p>:(
+            <fieldset id="ma5" className="bn ">
+            {
+                
+                this.props.list.map((product)=>{
+                if(!product.isBought){
+                    return <GroceriesItem key= {product.id} item={product}/>
+                }
+                return null
+                })
             }
-            return null
-            })
-        }
-        </fieldset>
-    )
+            </fieldset>)
+        )
+    }
 }
 
 const mapStateToProps = (state) =>{
     return{
-        list:state.flat.groceriesList
+        list:state.groceries.groceriesList,
+        loading:state.groceries.loading
     }
 }
-export default connect(mapStateToProps)(GroceriesList)
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        initGroceriesList: () =>dispatch(initGroceries())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(GroceriesList)
 
 

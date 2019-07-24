@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import * as actionsCreator from '../../store/actions/actionCreators'
+import * as actionsCreator from '../../store/actions/groceries'
 
 const GroceriesItem = (props) =>{
     return(

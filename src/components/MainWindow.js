@@ -18,13 +18,6 @@ class MainWindow extends React.Component{
             default:
                 return <Flatmates/>;
         }
-        // if(this.props.section === 'flatmates'){
-            
-        // }else if(this.props.section === 'bills'){
-        //     return(
-        //         <Bills/>
-        //     )
-        // }
     }
 }
 

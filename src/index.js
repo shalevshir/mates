@@ -11,8 +11,10 @@ import thunk from 'redux-thunk'
 
 import billsReducer from './store/billsReducer'
 import flatReducer from './store/flatReducer'
+import authReducer from './store/authReducer'
+import groceriesReducer from './store/groceriesReducer'
 
-const reducer = combineReducers({bills:billsReducer,flat:flatReducer})
+const reducer = combineReducers({bills:billsReducer,flat:flatReducer,groceries:groceriesReducer,auth:authReducer})
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 
