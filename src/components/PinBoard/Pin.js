@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import * as actionsTypes from '../../store/actions/actionsTypes'
+import * as actionsTypes from '../../store/actions/actionTypes'
 
 const Pin = (props) =>  {
     return (
