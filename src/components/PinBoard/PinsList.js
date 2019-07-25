@@ -1,16 +1,25 @@
 import React from 'react';
 import Pin from './Pin';
+import { connect } from 'react-redux'
+
 
 const PinsList = (props) =>  {
     return (
         <div className="flex flex-wrap">
             {props.list.map(pin => {
-                return <Pin pin={pin} key={pin.id} onRemoveItem={()=>props.onRemovePin(pin.id)}/>
+                // if(pin.showPin){
+                //     return <Pin pin={pin} key={pin.id}/>
+                // }
+                return (pin.showPin?<Pin pin={pin} key={pin.id}/>:null)
             })}
         </div>
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        list: state.pins.pinsList
+    }
+}
 
-
-export default PinsList;
+export default connect(mapStateToProps)(PinsList);

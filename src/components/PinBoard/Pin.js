@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux'
+import * as actionsTypes from '../../store/actions/actionsTypes'
 
 const Pin = (props) =>  {
     return (
@@ -17,11 +19,18 @@ const Pin = (props) =>  {
                 <p className="f6 lh-copy measure mt2 mid-gray">{props.pin.body}</p>
             </div>
             <div>
-                <button className="b input-reset ba b--black bg-transparent grow pointer " onClick={props.onRemoveItem} >X</button>
+                <button className="b input-reset ba b--black bg-transparent grow pointer " onClick={() => props.onRemoveItem(props.pin.id)} >X</button>
             </div>
         </div>
         </article>
     )
 }
+const mapDispatchToProps = (dispatch) => {
+    return{
+        onRemoveItem: (pinId) => {
+            return dispatch({type: actionsTypes.REMOVE_PIN, pinId})
+        }
+    }
+}
 
-export default Pin;
+export default connect(null,mapDispatchToProps)(Pin);
