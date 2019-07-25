@@ -17,7 +17,7 @@ const authSuccess = (authData) =>{
 const authFail = (error) =>{    
     return{
         type:ActionTypes.AUTH_FAIL,
-        error
+        error:error.data.error
     }
 }
 
@@ -29,13 +29,14 @@ export const auth = (email, password, isRegistered) =>{
         if(!isRegistered){
             url='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDx_awrzAaDLUc3FFF2rrJuQVK4yk2S2Oo'
         }
-        try {
-            const res = await axios.post(url,{email,password,returnSecureToken:true})
+        axios.post(url,{email,password,returnSecureToken:true})
+        .then(res =>{
             console.log(res.data)
             dispatch(authSuccess(res.data))
-        } catch (error) {
-            dispatch(authFail(error))
-        }
+        }).catch((error) => {
+            console.log(error.response)
+            dispatch(authFail(error.response))
+        })
     
 
 }

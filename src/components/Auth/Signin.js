@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import * as authActions from '../../store/actions/auth'
 import { connect } from 'react-redux'
+import Spinner from '../spinner'
 
 
 class Signin extends Component{
@@ -20,9 +21,13 @@ class Signin extends Component{
 
   render(){
     const isRegisteredLabel = `Switch To ${this.state.isRegistered?'Register':'Signin'}`
-    return(
-        <div>
-        <article className="pa4 black-80">
+    let errorMessage = null
+    if(this.props.error){
+      errorMessage = this.props.error.message
+    }
+    let form = (
+    <div>
+      <article className="pa4 black-80">
         <form onSubmit={this.handleSubmit} action="sign-up_submit" method="get" acceptCharset="utf-8">
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
             <legend className="ph0 mh0 fw6 clip">Sign In</legend>
@@ -35,19 +40,23 @@ class Signin extends Component{
               <input className="b pa2 input-reset ba bg-transparent" type="password" name="password"  ref="password"/>
             </div>
           </fieldset>
-          <div className="mt3"><input onClick={this.handleSubmit} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type="submit" value={this.state.isRegistered?"Signin":"Signup"}/></div>
+          <p>{errorMessage}</p>
           <div className="mt3"><input onClick={this.switchMethodHandle} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type="button" value={isRegisteredLabel}/>
+          <div className="mt3"><input onClick={this.handleSubmit} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type="submit" value={this.state.isRegistered?"Signin":"Signup"}/></div>
           </div>
         </form>
       </article>
-      
-        </div>
-    )
+    </div>)
+    if (this.props.loading){
+      form=<Spinner/>
+    }
+    return form
   }
 }
 const mapStateToProps = state => {
   return{
-    error:state.auth.error
+    error:state.auth.error,
+    loading:state.auth.loading
   }
 }
 
