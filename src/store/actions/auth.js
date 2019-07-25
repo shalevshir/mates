@@ -7,35 +7,36 @@ const authStart = () =>{
     }
 }
 const authSuccess = (authData) =>{
+    console.log(authData)
     return{
         type:ActionTypes.AUTH_SUCCESS,
-        tokenId:authData.data.idToken,
-        userId:authData.data.localId
+        tokenId:authData.idToken,
+        userId:authData.localId
     }
 }
-const authFail = (error) =>{
-    console.log(error)
-    
+const authFail = (error) =>{    
     return{
         type:ActionTypes.AUTH_FAIL,
         error
     }
 }
 
-export const auth =(dispatch) => async (email, password, isRegistered) =>{
-        dispatch(authStart)
+export const auth = (email, password, isRegistered) =>{
+    return async (dispatch) =>{
+        console.log(dispatch)
+        dispatch(authStart())
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDx_awrzAaDLUc3FFF2rrJuQVK4yk2S2Oo'
         if(!isRegistered){
             url='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDx_awrzAaDLUc3FFF2rrJuQVK4yk2S2Oo'
         }
         try {
             const res = await axios.post(url,{email,password,returnSecureToken:true})
-            console.log(res)
-            authSuccess(res)
+            console.log(res.data)
+            dispatch(authSuccess(res.data))
         } catch (error) {
-            console.log(error)
-            authFail(error)
+            dispatch(authFail(error))
         }
     
 
 }
+} 

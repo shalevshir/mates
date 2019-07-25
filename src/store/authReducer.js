@@ -8,6 +8,7 @@ const initialState= {
 }
 
 const authReducer = (state = initialState, action) =>{
+    console.log(action.tokenId)
     switch(action.type){
         case ActionTypes.AUTH_START:
             return {...state, error:null, loading:true}

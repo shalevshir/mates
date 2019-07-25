@@ -45,9 +45,15 @@ class Signin extends Component{
     )
   }
 }
-const mapDispatchToProps = dispatch =>{
+const mapStateToProps = state => {
   return{
-    submit:dispatch((email, password)=>authActions.auth(email, password))
+    error:state.auth.error
   }
 }
-export default connect(null,mapDispatchToProps)(Signin);
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    submit:(email, password, isRegistered)=>dispatch(authActions.auth(email, password, isRegistered))
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Signin);

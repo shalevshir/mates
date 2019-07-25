@@ -3,6 +3,7 @@ import Nevigation from './components/Nevigtion'
 import MainWindow from './components/MainWindow'
 import './App.css';
 import Signin from './components/Auth/Signin'
+import {connect} from 'react-redux'
 
 
 class App extends React.Component {
@@ -10,7 +11,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       section: 'pinboard',
-      isSignedIn: true
+      isSignedIn: false
     }
   }
   
@@ -26,7 +27,7 @@ class App extends React.Component {
   render (){
     return(
     <div className="App">
-    {this.state.isSignedIn?
+    {this.props.isSignedIn?
       <div>
       <Nevigation handleChange={this.onSectionChange.bind(this)}/>
       <MainWindow section={this.state.section}/></div>
@@ -37,5 +38,9 @@ class App extends React.Component {
   );
   }
 }
-
-export default App;
+const mapStateToProps = state =>{
+  return{
+    isSignedIn: state.auth.token?true:false
+  }
+}
+export default connect(mapStateToProps)(App);
