@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import GroceriesList from './GroceriesList'
 import GroceriesListBought from './GroceriesListBought'
 import AddGrocerie from './AddGrocerie'
-import * as actionsCreators from '../../store/actions/actionCreators'
+import * as actionsCreators from '../../store/actions/groceries'
 import {connect} from 'react-redux'
 
 class Groceries extends Component {
@@ -37,7 +37,7 @@ const mapStateToProps = (state) =>{
     return {
         flatName:state.flat.name,
         mates:state.flat.mates,
-        groceriesList:state.flat.groceriesList,
+        groceriesList:state.groceries.groceriesList,
         _id:state.flat._id
     }
 }

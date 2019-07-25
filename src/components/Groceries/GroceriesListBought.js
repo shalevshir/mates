@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 class GroceriesListBought extends React.Component{
     render(){
         return(
+            !this.props.list?<p>loading</p>:(
             <fieldset id="ma5" className="bn ">
             {this.props.list.map((product)=>{
                 if(product.isBought){
@@ -13,7 +14,7 @@ class GroceriesListBought extends React.Component{
                 }
                 return null
             })}
-            </fieldset>
+            </fieldset>)
         )
     }
 }
@@ -21,7 +22,7 @@ class GroceriesListBought extends React.Component{
 
 const mapStateToProps = (state) =>{
     return{
-        list:state.flat.groceriesList
+        list:state.groceries.groceriesList
     }
 }
 export default connect(mapStateToProps)(GroceriesListBought)

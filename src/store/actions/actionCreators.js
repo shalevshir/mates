@@ -1,20 +1,22 @@
-import * as actionsTypes from './actionsTypes'
+import * as actionsTypes from './actionTypes'
+import axios from '../../axios-flat'
 
-const checkItemAction =(id)=>{
 
-    return{type:actionsTypes.CHECK_ITEM, id}
-}
-export const checkItem = (id) =>{
+// const setGroceries = (groceriesList) =>{
+//     return {type:actionsTypes.SET_GROCERIES, groceriesList}
+// }
 
-    return (dispatch, getState) =>{
-        console.log('reaching server', getState())
-        setTimeout(()=>{
-            dispatch(checkItemAction(id))
-        },2000)
-    }
-    
-}
+// const fetchFail = () =>{
+//     return {type:actionsTypes.FETCH_FAIL}
+// }
 
-export const addGrocery =(input)=>{
-    return{type:actionsTypes.ADD_GROCERY, input}
-}
+// export const initGroceries = () =>{
+//     return async dispatch =>{
+//         try {    
+//             const res = await axios('/groceriesList.json')
+//             dispatch(setGroceries(res.data))
+//         } catch (error) {
+//             dispatch(fetchFail())
+//         }
+//     }
+// }

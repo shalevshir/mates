@@ -12,8 +12,10 @@ import thunk from 'redux-thunk'
 import billsReducer from './store/billsReducer'
 import flatReducer from './store/flatReducer'
 import pinsBoardReducer from './store/pinsBoardReducer'
+import authReducer from './store/authReducer'
+import groceriesReducer from './store/groceriesReducer'
 
-const reducer = combineReducers({bills:billsReducer,flat:flatReducer,pins:pinsBoardReducer})
+const reducer = combineReducers({bills:billsReducer,flat:flatReducer,pins:pinsBoardReducer,groceries:groceriesReducer,auth:authReducer})
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 
