@@ -28,10 +28,9 @@ export default (state = initState, action) =>{
                 groceriesList:state.groceriesList.concat(action.grocery)
             }
         case actionTypes.SET_GROCERIES:
-            const arr = Object.entries(action.groceriesList).map(e => Object.assign(e[1], { id: e[0] }));
             return {
                 ...state,
-                groceriesList:arr
+                groceriesList:action.newList
             }
         case actionTypes.FETCH_START :
             return{
