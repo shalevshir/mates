@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       section: 'pinboard',
-      isSignedIn: false
+      isSignedIn: true
     }
   }
   
@@ -27,7 +27,8 @@ class App extends React.Component {
   render (){
     return(
     <div className="App">
-    {this.props.isSignedIn?
+    {/* {this.props.isSignedIn? */}
+    {this.state.isSignedIn?
       <div>
       <Nevigation handleChange={this.onSectionChange.bind(this)}/>
       <MainWindow section={this.state.section}/></div>
@@ -40,7 +41,7 @@ class App extends React.Component {
 }
 const mapStateToProps = state =>{
   return{
-    isSignedIn: state.auth.token?true:false
+    isSignedIn: state.auth.token !== null
   }
 }
 export default connect(mapStateToProps)(App);

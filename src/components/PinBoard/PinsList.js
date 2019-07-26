@@ -3,6 +3,7 @@ import Pin from './Pin';
 import { connect } from 'react-redux'
 
 
+
 const PinsList = (props) =>  {
     return (
         <div className="flex flex-wrap">

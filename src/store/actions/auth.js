@@ -49,7 +49,7 @@ export const auth = (email, password, isRegistered) =>{
             dispatch(authSuccess(res.data))
             dispatch(authTimeOut(res.data.expiresIn))
         }).catch((error) => {
-            console.log(error.response)
+            console.log(error)
             dispatch(authFail(error.response))
         })
     
