@@ -4,7 +4,7 @@ import MainWindow from './components/MainWindow'
 import './App.css';
 import Signin from './components/Auth/Signin'
 import {connect} from 'react-redux'
-
+  import { checkAuthStatus } from './store/actions/auth'
 
 class App extends React.Component {
   constructor(props){
@@ -13,6 +13,9 @@ class App extends React.Component {
       section: 'pinboard',
       isSignedIn: true
     }
+  }
+  componentDidMount(){
+    this.props.checkAuth()
   }
   
   onSectionChange(section){
@@ -28,7 +31,7 @@ class App extends React.Component {
     return(
     <div className="App">
     {/* {this.props.isSignedIn? */}
-    {this.state.isSignedIn?
+    {this.props.isSignedIn?
       <div>
       <Nevigation handleChange={this.onSectionChange.bind(this)}/>
       <MainWindow section={this.state.section}/></div>
@@ -44,4 +47,10 @@ const mapStateToProps = state =>{
     isSignedIn: state.auth.token !== null
   }
 }
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    checkAuth: () => dispatch(checkAuthStatus())
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(App);

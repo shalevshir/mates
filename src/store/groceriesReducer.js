@@ -17,7 +17,7 @@ export default (state = initState, action) =>{
             }
         case actionTypes.ADD_GROCERY_FAIL:
             return{
-                ...state,
+                ...state, 
                 loading:false,
                 error:true
             }
@@ -30,7 +30,8 @@ export default (state = initState, action) =>{
         case actionTypes.SET_GROCERIES:
             return {
                 ...state,
-                groceriesList:action.newList
+                groceriesList:action.newList,
+                loading:false
             }
         case actionTypes.FETCH_START :
             return{
@@ -38,7 +39,11 @@ export default (state = initState, action) =>{
                 loading:true,
                 error:false
             }
-        case actionTypes.CHECK_ITEM :
+        case actionTypes.CHECK_START:
+            return{
+                ...state
+            }
+        case actionTypes.CHECK_SUCCESS :
             const updatedList = state.groceriesList.filter(item => {
                 if(item.id === action.id)
                     item.isBought=!item.isBought
@@ -46,7 +51,8 @@ export default (state = initState, action) =>{
             })
             return{
                 ...state,
-                groceriesList:updatedList
+                groceriesList:updatedList,
+                loading:false
             }
         default:
             return state

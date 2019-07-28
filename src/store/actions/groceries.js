@@ -33,17 +33,15 @@ export const addGrocery =(input)=>{
             const duplicate = getState().groceries.groceriesList.find(item=>item.product===input)
             console.log(duplicate)
             if(duplicate && duplicate.isBought){
-                const updatedRegistry = getState().groceries.groceriesList.find(grocery=>grocery.id===duplicate.id)
-                await axios.patch(`/groceriesList/${duplicate.id}.json`,{isBought:!updatedRegistry.isBought})
-                dispatch(checkItemAction(duplicate.id))
+                dispatch(checkItem(duplicate.id))
             }else if(duplicate && !duplicate.isBought){
                 alert('Item is aleady on the list')
             }else{
-                    const res = await axios.post('/groceriesList.json',{isBought:false,product:input})
-                    dispatch(addGrocerySuccess(res.data.name, input))
-                
+                const res = await axios.post('flatId/groceriesList.json?auth=' + getState().auth.token,{isBought:false,product:input})
+                dispatch(addGrocerySuccess(res.data.name, input))
             }
         } catch (error) {
+            console.log(error)
             dispatch(addGroceryFail())
         }
     }
@@ -65,10 +63,10 @@ const fetchFail = () =>{
 }
 
 export const initGroceries = () =>{
-    return async dispatch =>{
+    return async (dispatch, getState) =>{
         dispatch(fetchStart())
         try {    
-            const res = await axios('/groceriesList.json')
+            const res = await axios('flatId/groceriesList.json?auth=' +getState().auth.token)
             const newList = Object.entries(res.data).map(item => Object.assign(item[1], { id: item[0] }));
             console.log(newList)
             dispatch(setGroceries(newList))
@@ -78,20 +76,22 @@ export const initGroceries = () =>{
     }
 }
 
-const checkItemAction =(id)=>{
-    console.log('action')
-    return{type:actionTypes.CHECK_ITEM, id}
-}
+const checkItemSuccess = (id) =>({type:actionTypes.CHECK_SUCCESS, id})
+
+const checkItemFail = (err) =>({type:actionTypes.CHECK_FAIL, err})
+
+const checkItemStart = () =>( {type:actionTypes.CHECK_START})
 
 export const checkItem = (id) =>{
     console.log('check')
     return async (dispatch, getState) =>{
+        dispatch(checkItemStart())
         const updatedRegistry = getState().groceries.groceriesList.find(grocery=>grocery.id===id)
 
-        axios.patch(`/groceriesList/${id}.json`,{isBought:!updatedRegistry.isBought}).then(()=>{
-            dispatch(checkItemAction(id))
+        axios.patch(`flatId/groceriesList/${id}.json`,{isBought:!updatedRegistry.isBought}).then(()=>{
+            dispatch(checkItemSuccess(id))
         }).catch(err=>{
-            console.log(err)
+            dispatch(checkItemFail(err))
         })
     }
     

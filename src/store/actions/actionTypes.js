@@ -1,4 +1,6 @@
-export const CHECK_ITEM = 'CHECK_ITEM'
+export const CHECK_START = 'CHECK_START'
+export const CHECK_SUCCESS= 'CHECK_SUCCESS'
+export const CHECK_FAIL= 'CHECK_FAIL'
 
 export const ADD_GROCERY= 'ADD_GROCERY'
 export const ADD_GROCERY_START= 'ADD_GROCERY_START'

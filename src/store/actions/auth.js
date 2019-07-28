@@ -21,6 +21,11 @@ const authFail = (error) =>{
     }
 }
 const logout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('expiresIn')
+    localStorage.removeItem('userId')
+
+    
     return{
         type:ActionTypes.AUTH_LOGOUT
     }
@@ -37,7 +42,6 @@ const authTimeOut = (expirationTime) =>{
 
 export const auth = (email, password, isRegistered) =>{
     return async (dispatch) =>{
-        console.log(dispatch)
         dispatch(authStart())
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDx_awrzAaDLUc3FFF2rrJuQVK4yk2S2Oo'
         if(!isRegistered){
@@ -45,7 +49,11 @@ export const auth = (email, password, isRegistered) =>{
         }
         axios.post(url,{email,password,returnSecureToken:true})
         .then(res =>{
-            console.log(res.data)
+            console.log('successfull authentication' , res.data)
+            const expirationTime = new Date(new Date().getTime() + res.data.expiresIn * 1000)
+            localStorage.setItem('token', res.data.idToken)
+            localStorage.setItem('expiresIn', expirationTime)
+            localStorage.setItem('userId', res.data.localId)
             dispatch(authSuccess(res.data))
             dispatch(authTimeOut(res.data.expiresIn))
         }).catch((error) => {
@@ -54,5 +62,24 @@ export const auth = (email, password, isRegistered) =>{
         })
     
 
-}
+    }
 } 
+
+export const checkAuthStatus = () =>{
+    return dispatch =>{
+        const token = localStorage.getItem('token')
+        if(!token){
+            console.log('no available token')
+            dispatch(logout())
+            return
+        }
+        const expirationTime = new Date(localStorage.getItem('expiresIn'))
+        const userId = localStorage.getItem('userId')
+        if(expirationTime > new Date()){
+            dispatch(authSuccess({idToken:token,localId:userId}))
+            dispatch(authTimeOut((expirationTime.getTime() - new Date().getTime())/1000))
+        }else{
+            dispatch(logout())
+        }
+    }
+}

@@ -5,12 +5,9 @@ import * as actionTypes from '../../store/actions/actionTypes'
 import { initGroceries } from '../../store/actions/groceries'
 
 class GroceriesList extends React.Component{
-    componentDidMount(){
-        this.props.initGroceriesList()
-    }
+    
     render(){
         return(
-            !this.props.list?<p>loading</p>:(
             <fieldset id="ma5" className="bn ">
             {
                 
@@ -21,7 +18,7 @@ class GroceriesList extends React.Component{
                 return null
                 })
             }
-            </fieldset>)
+            </fieldset>
         )
     }
 }

@@ -18,7 +18,7 @@ const Nevigation = (props) => {
             onClick={()=>{props.handleChange('groceries')}}>
             Groceries
         </p>
-        <p className="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l" 
+        <p className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" 
             onClick={()=>{props.handleChange('pinboard')}}>
             Pin Board
         </p>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import * as actionsCreator from '../../store/actions/groceries'
+import * as GroceriesActions from '../../store/actions/groceries'
 
 const GroceriesItem = (props) =>{
     return(
@@ -15,7 +15,7 @@ const GroceriesItem = (props) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        onCheck: (id)=> dispatch(actionsCreator.checkItem(id))
+        onCheck: (id)=> dispatch(GroceriesActions.checkItem(id))
     }
 }
 export default connect(null,mapDispatchToProps)(GroceriesItem)
