@@ -45,6 +45,7 @@ class PinBoard extends React.Component {
                 {openAddPinModal}
                 <AddPin modalIsOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)} />
                 <PinsList list={this.state.pinsList} onRemovePin={(pinId) =>this.onRemovePin(pinId)}/>
+                
             </div>
         )
     }

@@ -15,3 +15,5 @@ export const FETCH_START = 'FETCH_START'
 export const FETCH_FAIL ='FETCH_FAIL'
 
 export const REMOVE_PIN= 'REMOVE_PIN'
+export const ADD_PIN= 'ADD_PIN'
+

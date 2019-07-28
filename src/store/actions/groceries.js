@@ -33,14 +33,14 @@ export const addGrocery =(input)=>{
             const duplicate = getState().groceries.groceriesList.find(item=>item.product===input)
             console.log(duplicate)
             if(duplicate && duplicate.isBought){
-                const updatedRegistry = getState().groceries.groceriesList.find(grocery=>grocery.id===duplicate.id)
-                await axios.patch(`/groceriesList/${duplicate.id}.json`,{isBought:!updatedRegistry.isBought})
-                dispatch(checkItemAction(duplicate.id))
+                dispatch(checkItem(duplicate.id))
             }else if(duplicate && !duplicate.isBought){
                 alert('Item is aleady on the list')
             }else{
-                    const res = await axios.post('/groceriesList.json',{isBought:false,product:input})
-                    dispatch(addGrocerySuccess(res.data.name, input))
+                const newGrocery = {isBought:false,product:input}
+                const res = await axios.post('/groceriesList.json', newGrocery)
+                console.log(res)
+                dispatch(addGrocerySuccess(res.data.name, input))
                 
             }
         } catch (error) {

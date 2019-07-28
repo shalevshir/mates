@@ -1,4 +1,5 @@
 import * as actionsTypes from './actions/actionTypes'
+import { stat } from 'fs';
 
 const initialState = {
     pinsList:[
@@ -42,10 +43,24 @@ const removePin = (state, action) => {
     return {...state, pinsList:newList}
 }
 
+const addPin = (state, action) => {
+    const newPin ={
+        title: action.pin.title,
+        body: action.pin.body,
+        id: new Date(), /*action.pin.id,*/
+        date: new Date(),
+        mate: 'ofer',
+        showPin: true
+    }
+    return {...state, pinsList: state.pinsList.concat(newPin)} 
+}
+
 const pinsBoardReducer = (state=initialState, action)=> {
     switch (action.type){
         case actionsTypes.REMOVE_PIN:
             return removePin(state, action);
+        case actionsTypes.ADD_PIN:
+            return addPin(state, action);
         default :
          return state
     }
