@@ -8,9 +8,7 @@ const GroceriesItem = (props) =>{
             <input className="mr3 mt1" type="checkbox" checked={props.item.isBought} id={props.item.id} value={props.item.product} onChange={()=>{props.onCheck(props.item.id)}}/>
             <label className={props.item.isBought?'strike ':null} onClick={()=>{props.onCheck(props.item.id)}}>{props.item.product}</label>
         </div>
-
     )
-    
 }
 
 const mapDispatchToProps = (dispatch) =>{
