@@ -8,17 +8,16 @@ class Flatmates extends React.Component{
             {
                 name: 'Shalev',
                 email: 'shalevshir@gmail.com',
-                flat: 'flat1',
                 _id:'123'
             },
             {
                 name: 'Ofer',
                 email: 'oferbrmn@gmail.com',
-                flat: 'flat1',
                 _id:'456'
             }
         ]
     }
+
     render(){
         return(
             <div>

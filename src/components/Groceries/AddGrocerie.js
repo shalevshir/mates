@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from 'react-modal';
-import * as actionsCreators from '../../store/actions/actionCreators'
 import { connect } from 'react-redux'
 import Spinner from '../spinner'
 import { addGrocery } from '../../store/actions/groceries'

@@ -1,7 +1,6 @@
 import React from 'react'
 import GroceriesItem from './GroceriesItem'
 import {connect} from 'react-redux'
-import * as actionTypes from '../../store/actions/actionTypes'
 import { initGroceries } from '../../store/actions/groceries'
 
 class GroceriesList extends React.Component{

@@ -1,9 +1,6 @@
 import React from 'react';
 import PinsList from './PinsList';
 import AddPin from './AddPin'
-import { connect } from 'react-redux';
-import * as actionsCreators from '../../store/actions/actionCreators';
-
 
 class PinBoard extends React.Component {
     state = {

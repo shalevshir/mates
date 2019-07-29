@@ -33,7 +33,6 @@ const logout = () => {
 
 const authTimeOut = (expirationTime) =>{
     return dispatch =>{
-        console.log(expirationTime)
         setTimeout(()=>{
             dispatch(logout())
         },expirationTime*1000)

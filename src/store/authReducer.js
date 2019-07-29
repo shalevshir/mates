@@ -8,12 +8,10 @@ const initialState= {
 }
 
 const authReducer = (state = initialState, action) =>{
-    console.log(action.tokenId)
     switch(action.type){
         case ActionTypes.AUTH_START:
             return {...state, error:null, loading:true}
         case ActionTypes.AUTH_SUCCESS:
-            console.log(action)
             return {...state, token:action.tokenId,userId:action.userId,error:null, loading:false}
         case ActionTypes.AUTH_FAIL:
             return {...state, error:action.error, loading:false}

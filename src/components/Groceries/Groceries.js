@@ -11,9 +11,9 @@ class Groceries extends Component {
     state={
         modalIsOpen:false
     }
-    // componentDidMount(){
-    //     this.props.initGroceriesList()
-    // }
+    componentDidMount(){
+        this.props.initGroceriesList()
+    }
     
   openModal() {
     this.setState({modalIsOpen: true});

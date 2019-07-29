@@ -36,6 +36,7 @@ export const addGrocery =(input)=>{
                 dispatch(checkItem(duplicate.id))
             }else if(duplicate && !duplicate.isBought){
                 alert('Item is aleady on the list')
+                dispatch(addGroceryFail())
             }else{
                 const res = await axios.post('flatId/groceriesList.json?auth=' + getState().auth.token,{isBought:false,product:input})
                 dispatch(addGrocerySuccess(res.data.name, input))
@@ -68,7 +69,7 @@ export const initGroceries = () =>{
         try {    
             const res = await axios('flatId/groceriesList.json?auth=' +getState().auth.token)
             const newList = Object.entries(res.data).map(item => Object.assign(item[1], { id: item[0] }));
-            console.log(newList)
+            console.log('initial list:' , newList)
             dispatch(setGroceries(newList))
         } catch (error) {
             dispatch(fetchFail())
