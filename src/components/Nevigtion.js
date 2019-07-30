@@ -1,27 +1,30 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom'
 
 const Nevigation = (props) => {
+    console.log('nav')
 
     return(
     <div>
         <nav className="bt bb tc mw7 center mt4">
-        <p 
-            className="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" 
-             onClick={()=>props.handleChange('flatmates')}>
+        <NavLink to="/" exact
+            className="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l"
+            activeClassName="f6 f5-l link bg-animate black-80 bg-lightest-blue dib pa3 ph4-l">
             Flatmates
-        </p>
-        <p className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" 
-            onClick={()=>props.handleChange('bills')}>
+        </NavLink >
+        <NavLink to="/bills"
+            className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l"
+            activeClassName="f6 f5-l link bg-animate black-80 bg-light-green dib pa3 ph4-l">
             Bills
-        </p>
-        <p className="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l" 
-            onClick={()=>{props.handleChange('groceries')}}>
+        </NavLink >
+        <NavLink to="/groceries" className="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l"
+        activeClassName="f6 f5-l link bg-animate black-80 bg-light-blue dib pa3 ph4-l">
             Groceries
-        </p>
-        <p className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" 
-            onClick={()=>{props.handleChange('pinboard')}}>
+        </NavLink >
+        <NavLink to="/pinboard" className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l"
+            activeClassName="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l">
             Pin Board
-        </p>
+        </NavLink >
     </nav>
   </div>
   );
