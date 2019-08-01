@@ -19,3 +19,9 @@ export const FETCH_FAIL ='FETCH_FAIL'
 export const REMOVE_PIN= 'REMOVE_PIN'
 export const ADD_PIN= 'ADD_PIN'
 
+export const FETCH_MATES = 'FETCH_MATES'
+export const FETCH_MATES_START = 'FETCH_MATES_START'
+export const FETCH_MATES_SUCCESS = 'FETCH_MATES_SUCCESS'
+export const FETCH_MATES_FAIL = 'FETCH_MATES_FAIL'
+
+export const FETCH_FLATID = 'FETCH_FLATID'

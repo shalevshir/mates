@@ -1,5 +1,6 @@
 import * as ActionTypes from './actionTypes'
-import axios from 'axios'
+import axios from '../../axios-flat'
+import axiosUsers from '../../axios-users'
 
 const authStart = () =>{
     return{
@@ -24,6 +25,7 @@ const logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('expiresIn')
     localStorage.removeItem('userId')
+    localStorage.removeItem('flatId')
 
     
     return{
@@ -53,8 +55,14 @@ export const auth = (email, password, isRegistered) =>{
             localStorage.setItem('token', res.data.idToken)
             localStorage.setItem('expiresIn', expirationTime)
             localStorage.setItem('userId', res.data.localId)
+            console.log('test', res.data.localId)
+            dispatch(getUserFlat(res.data.localId,res.data.idToken))
             dispatch(authSuccess(res.data))
             dispatch(authTimeOut(res.data.expiresIn))
+            if(!isRegistered){
+                dispatch(addUserToDatabase(res.data.localId,res.data.idToken))
+            }
+
         }).catch((error) => {
             console.log(error)
             dispatch(authFail(error.response))
@@ -76,9 +84,30 @@ export const checkAuthStatus = () =>{
         const userId = localStorage.getItem('userId')
         if(expirationTime > new Date()){
             dispatch(authSuccess({idToken:token,localId:userId}))
+            dispatch(getUserFlat(userId, token))
             dispatch(authTimeOut((expirationTime.getTime() - new Date().getTime())/1000))
         }else{
             dispatch(logout())
         }
+    }
+}
+export const getUserFlat =  (userId, token) =>{
+    return async dispatch => {
+        const res = await axiosUsers.get(`/${userId}/flat.json?auth=${token}`)
+        localStorage.setItem('flatId',res.data)
+        dispatch({type:ActionTypes.FETCH_FLATID,flatId:res.data})
+
+    }
+    
+}
+
+
+const addUserToDatabase = (userId, token) => {
+    return dispatch =>{
+        axiosUsers.put(`/${userId}.json?auth=${token}`,{flat:'newflat', admin:true}).then(res =>{
+            console.log('added to server' , res)
+        }).catch(err => {
+            console.log(err)
+        })
     }
 }

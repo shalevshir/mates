@@ -3,6 +3,7 @@ import * as ActionTypes from './actions/actionTypes'
 const initialState= {
     token:null,
     userId:null,
+    flatId:null,
     error:null,
     loading:false
 }
@@ -16,7 +17,9 @@ const authReducer = (state = initialState, action) =>{
         case ActionTypes.AUTH_FAIL:
             return {...state, error:action.error, loading:false}
         case ActionTypes.AUTH_LOGOUT:
-            return {...state, token:null, userId:null}
+            return {...state, token:null, userId:null, flatId:null}
+        case ActionTypes.FETCH_FLATID:
+            return{...state, flatId:action.flatId}
         default:
             return state
     }

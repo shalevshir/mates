@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+
 export default axios.create({
-    baseURL:'https://flat-d00f8.firebaseio.com/'
+    baseURL:'https://flat-d00f8.firebaseio.com/'+localStorage.getItem('flatId')
 })

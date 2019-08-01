@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from '../../axios-flat'
+const tokenn = localStorage.getItem('token')
 
 const addGroceryStart = () =>{
     return{
@@ -38,7 +39,7 @@ export const addGrocery =(input)=>{
                 alert('Item is aleady on the list')
                 dispatch(addGroceryFail())
             }else{
-                const res = await axios.post('flatId/groceriesList.json?auth=' + getState().auth.token,{isBought:false,product:input})
+                const res = await axios.post(`/groceriesList.json?auth=` + tokenn,{isBought:false,product:input})
                 dispatch(addGrocerySuccess(res.data.name, input))
             }
         } catch (error) {
@@ -63,17 +64,20 @@ const fetchFail = () =>{
     return {type:actionTypes.FETCH_FAIL}
 }
 
-export const initGroceries = () =>{
+export const initGroceries = (token) =>{
     return async (dispatch, getState) =>{
-        dispatch(fetchStart())
-        try {    
-            const res = await axios('flatId/groceriesList.json?auth=' +getState().auth.token)
-            const newList = Object.entries(res.data).map(item => Object.assign(item[1], { id: item[0] }));
-            console.log('initial list:' , newList)
-            dispatch(setGroceries(newList))
-        } catch (error) {
-            dispatch(fetchFail())
-        }
+        const flatId = localStorage.getItem('flatId')
+        console.log(flatId, token)
+            dispatch(fetchStart())
+            try {
+                const res = await axios(`/groceriesList.json?auth=` +token)
+                const newList = Object.entries(res.data).map(item => Object.assign(item[1], { id: item[0] }));
+                console.log('initial list:' , newList)
+                dispatch(setGroceries(newList))
+            } catch (error) {
+                dispatch(fetchFail())
+            }
+        
     }
 }
 
@@ -89,9 +93,10 @@ export const checkItem = (id) =>{
         dispatch(checkItemStart())
         const updatedRegistry = getState().groceries.groceriesList.find(grocery=>grocery.id===id)
 
-        axios.patch(`flatId/groceriesList/${id}.json`,{isBought:!updatedRegistry.isBought}).then(()=>{
+        axios.patch(`/groceriesList/${id}.json?auth=${tokenn}`,{isBought:!updatedRegistry.isBought}).then(()=>{
             dispatch(checkItemSuccess(id))
         }).catch(err=>{
+            console.log(err)
             dispatch(checkItemFail(err))
         })
     }

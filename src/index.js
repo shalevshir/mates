@@ -10,12 +10,12 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
 import billsReducer from './store/billsReducer'
-import flatReducer from './store/flatReducer'
+import matesReducer from './store/matesReducer'
 import pinsBoardReducer from './store/pinsBoardReducer'
 import authReducer from './store/authReducer'
 import groceriesReducer from './store/groceriesReducer'
 
-const reducer = combineReducers({bills:billsReducer,flat:flatReducer,pins:pinsBoardReducer,groceries:groceriesReducer,auth:authReducer})
+const reducer = combineReducers({bills:billsReducer,mates:matesReducer,pins:pinsBoardReducer,groceries:groceriesReducer,auth:authReducer})
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 

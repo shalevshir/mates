@@ -1,29 +1,35 @@
 import React from 'react'
 import MateCard from './MateCard'
+import {connect} from 'react-redux'
+import {initMatesList} from '../../store/actions/mates'
 
 
 class Flatmates extends React.Component{
-    state={
-        Mates: [
-            {
-                name: 'Shalev',
-                email: 'shalevshir@gmail.com',
-                _id:'123'
-            },
-            {
-                name: 'Ofer',
-                email: 'oferbrmn@gmail.com',
-                _id:'456'
-            }
-        ]
-    }
+    state={}
 
+    componentDidMount(){
+        this.props.initMate(this.props.token)
+    }
     render(){
         return(
             <div>
-                {this.state.Mates.map(mate => <MateCard mate={mate} key={mate.name} />)}
+                {this.props.list.map(mate => <MateCard mate={mate} key={mate.name} />)}
             </div>
             )
     }
 }
-export default Flatmates;
+
+const mapStateToProps = state =>{
+    return{
+        list:state.mates.mates,
+        token:state.auth.token
+    }
+}
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        initMate:(token)=>dispatch(initMatesList(token))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Flatmates);

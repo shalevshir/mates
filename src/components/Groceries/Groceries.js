@@ -12,7 +12,7 @@ class Groceries extends Component {
         modalIsOpen:false
     }
     componentDidMount(){
-        this.props.initGroceriesList()
+        this.props.initGroceriesList(this.props.token)
     }
     
   openModal() {
@@ -45,7 +45,8 @@ class Groceries extends Component {
 const mapStateToProps = (state) =>{
     return {
         groceriesList:state.groceries.groceriesList,
-        loading:state.groceries.loading
+        loading:state.groceries.loading,
+        token:state.auth.token
     }
 }
 
@@ -53,7 +54,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = dispatch =>{
     return{
         onCheck: (id)=> dispatch(actionsCreators.checkItem(id)),
-        initGroceriesList: () =>dispatch(initGroceries())
+        initGroceriesList: (token) =>dispatch(initGroceries(token))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Groceries)
