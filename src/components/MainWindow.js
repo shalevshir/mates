@@ -17,7 +17,7 @@ class MainWindow extends React.Component{
                 <Route path="/flatmates" exact component={Flatmates}/>
                 <Route path='/groceries' component={Groceries}/>
                 <Route path='/pinboard' component={PinBoard}/>
-                <Redirect from='/' exact to='/flatmates'/>
+                <Redirect from='/' to='/flatmates'/>
             </Switch>
         )
         

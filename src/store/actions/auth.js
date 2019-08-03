@@ -1,5 +1,5 @@
 import * as ActionTypes from './actionTypes'
-import axios from '../../axios-flat'
+import axios from 'axios'
 import axiosUsers from '../../axios-users'
 
 const authStart = () =>{
@@ -25,9 +25,7 @@ const logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('expiresIn')
     localStorage.removeItem('userId')
-    localStorage.removeItem('flatId')
-
-    
+    localStorage.removeItem('flatId')    
     return{
         type:ActionTypes.AUTH_LOGOUT
     }
@@ -55,10 +53,10 @@ export const auth = (email, password, isRegistered) =>{
             localStorage.setItem('token', res.data.idToken)
             localStorage.setItem('expiresIn', expirationTime)
             localStorage.setItem('userId', res.data.localId)
-            console.log('test', res.data.localId)
-            dispatch(getUserFlat(res.data.localId,res.data.idToken))
             dispatch(authSuccess(res.data))
             dispatch(authTimeOut(res.data.expiresIn))
+            dispatch(getUserFlat(res.data.localId,res.data.idToken))
+
             if(!isRegistered){
                 dispatch(addUserToDatabase(res.data.localId,res.data.idToken))
             }
@@ -91,11 +89,39 @@ export const checkAuthStatus = () =>{
         }
     }
 }
+const fetchFlatStart = () => {
+    return{
+        type:ActionTypes.FETCH_FLAT_START
+    }
+}
+
+const fetchFlatSuccess = (flatId) =>{
+    return{
+        type:ActionTypes.FETCH_FLAT_SUCCESS,
+        flatId
+    }
+}
+
+const fetchFlatFail = (error) => {
+    return{
+        type:ActionTypes.FETCH_FLAT_FAIL,
+        error
+    }
+}
+
 export const getUserFlat =  (userId, token) =>{
     return async dispatch => {
-        const res = await axiosUsers.get(`/${userId}/flat.json?auth=${token}`)
-        localStorage.setItem('flatId',res.data)
-        dispatch({type:ActionTypes.FETCH_FLATID,flatId:res.data})
+        console.log('flat id:' , localStorage.getItem('flatId'))
+            try {
+                dispatch(fetchFlatStart())
+                const res = await axiosUsers.get(`/${userId}/flat.json?auth=${token}`)
+                localStorage.setItem('flatId',res.data)
+                dispatch(fetchFlatSuccess(res.data))
+            } catch (error) {
+                console.log(error)
+                dispatch(fetchFlatFail(error))
+            }
+        
 
     }
     

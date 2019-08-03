@@ -12,22 +12,20 @@ class Groceries extends Component {
         modalIsOpen:false
     }
     componentDidMount(){
-        this.props.initGroceriesList(this.props.token)
+        // this.props.initGroceriesList()
     }
     
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
+    openModal() {
+        this.setState({modalIsOpen: true});
+    }
  
-  closeModal() {
-    this.setState({modalIsOpen: false});
-  }
-  
- 
+    closeModal() {
+        this.setState({modalIsOpen: false});
+    }
 
     render(){
         let list = <Spinner/>
-        if(!this.props.loading){
+        if(!this.props.loadingAuth){
             list =(
                 <div>
                     <AddGrocerie modalIsOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)}  />
@@ -46,7 +44,9 @@ const mapStateToProps = (state) =>{
     return {
         groceriesList:state.groceries.groceriesList,
         loading:state.groceries.loading,
-        token:state.auth.token
+        loadingAuth:state.auth.loading,
+        token:state.auth.token,
+        flatId:state.auth.flatId
     }
 }
 
