@@ -27,8 +27,8 @@ class AddPin extends React.Component {
       console.log(this.refs)
       const newPin= {
           title: this.refs.title.value,
-          body: this.refs.title.value}      
-        this.props.onAdd(newPin)
+          body: this.refs.body.value}      
+        this.props.onAdd(newPin,this.props.closeModal)
     }
 
     render(){
@@ -67,7 +67,10 @@ class AddPin extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAdd: (newPin) => dispatch(addPin(newPin))
+    onAdd: (newPin, close) => {
+      close()
+      dispatch(addPin(newPin))
+    } 
   }
 }
 

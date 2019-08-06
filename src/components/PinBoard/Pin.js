@@ -2,7 +2,24 @@ import React from 'react';
 import {connect} from 'react-redux'
 import * as actionsTypes from '../../store/actions/actionTypes'
 
+// "base" component.
+import ReactTimeAgo from 'react-time-ago'
+
+// "custom-tooltip" component.
+// Requires React >= 16.
+// import ReactTimeAgo from 'react-time-ago/tooltip'
+
 const Pin = (props) =>  {
+
+    const pinnedBefore = (date) => {
+        
+        const todayDate = <ReactTimeAgo date={date}/>
+        const postedBefore = todayDate
+        console.log('different is', (Date.now() - date))
+        console.log('todayDate is:', todayDate)
+        return (postedBefore)
+    }
+
     return (
         <article className="br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center">
         <div>
@@ -19,6 +36,7 @@ const Pin = (props) =>  {
                 <p className="f6 lh-copy measure mt2 mid-gray">{props.pin.body}</p>
             </div>
             <div>
+                <div>Pinned {pinnedBefore(props.pin.date)}</div>
                 <button className="b input-reset ba b--black bg-transparent grow pointer " onClick={() => props.onRemoveItem(props.pin.id)} >X</button>
             </div>
         </div>

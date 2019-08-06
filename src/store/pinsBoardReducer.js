@@ -7,7 +7,7 @@ const initialState = {
             title: 'party tonight',
             body: 'screen shot from facebook',
             id: '123',
-            date: new Date(),
+            date: new Date().getTime(),
             mate: 'Shalev',
             showPin: true
         },
@@ -15,7 +15,7 @@ const initialState = {
             title: 'party tonight',
             body: 'post',
             id: '456',
-            date: new Date(),
+            date: new Date().getTime(),
             mate: 'Ofer',
             showPin: true
         },
@@ -23,7 +23,7 @@ const initialState = {
             title: 'party tonight',
             body: 'text',
             id: '125',
-            date: new Date(),
+            date: new Date().getTime(),
             mate: 'Ofer',
             showPin: true
         }

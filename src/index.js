@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import JavascriptTimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
@@ -14,6 +17,9 @@ import flatReducer from './store/flatReducer'
 import pinsBoardReducer from './store/pinsBoardReducer'
 import authReducer from './store/authReducer'
 import groceriesReducer from './store/groceriesReducer'
+
+JavascriptTimeAgo.locale(en)
+
 
 const reducer = combineReducers({bills:billsReducer,flat:flatReducer,pins:pinsBoardReducer,groceries:groceriesReducer,auth:authReducer})
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
