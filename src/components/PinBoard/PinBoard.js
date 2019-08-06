@@ -1,11 +1,17 @@
 import React from 'react';
 import PinsList from './PinsList';
 import AddPin from './AddPin'
+import {initPins} from '../../store/actions/pinsBoard'
+import {connect} from 'react-redux'
 
 class PinBoard extends React.Component {
     state = {
         modalIsOpen: false
 
+    }
+
+    componentDidMount() {
+        this.props.initializePins(this.props.token,this.props.flatId)
     }
 
     onRemovePin = (id) => {
@@ -46,7 +52,19 @@ class PinBoard extends React.Component {
     }
 }
  
+const mapDispatchToProps = (dispatch) => {
+    return {
+        initializePins: (token, flatId) => dispatch(initPins(token,flatId))
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        token: state.auth.token,
+        flatId: state.auth.flatId
+    }
+}
 
 
 
-export default PinBoard;
+export default connect(mapStateToProps,mapDispatchToProps)(PinBoard);
