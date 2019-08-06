@@ -1,30 +1,47 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import {NavLink} from 'react-router-dom'
+import { logout } from '../store/actions/auth'
 
 const Nevigation = (props) => {
 
     return(
     <div>
-        <nav className="bt bb tc mw7 center mt4">
-        <p 
-            className="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" 
-             onClick={()=>props.handleChange('flatmates')}>
+    <button  onClick = {props.onLogout} className="f6 f5-l link bg-animate black-80 hover-bg-light-red dib pa1 ph4-l">Logout</button>
+    <nav className="bt bb tc mw7 center mt4">
+        <NavLink to="/flatmates"
+            className="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l"
+            activeClassName="f6 f5-l link bg-animate black-80 bg-lightest-blue dib pa3 ph4-l">
             Flatmates
-        </p>
-        <p className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" 
-            onClick={()=>props.handleChange('bills')}>
+        </NavLink >
+        <NavLink to="/bills"
+            className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l"
+            activeClassName="f6 f5-l link bg-animate black-80 bg-light-green dib pa3 ph4-l">
             Bills
-        </p>
-        <p className="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l" 
-            onClick={()=>{props.handleChange('groceries')}}>
+        </NavLink >
+        <NavLink to="/groceries" className="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l"
+            activeClassName="f6 f5-l link bg-animate black-80 bg-light-blue dib pa3 ph4-l">
             Groceries
-        </p>
-        <p className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" 
-            onClick={()=>{props.handleChange('pinboard')}}>
+        </NavLink >
+        <NavLink to="/pinboard" className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l"
+            activeClassName="f6 f5-l link bg-animate black-80 bg-light-green dib pa3 ph4-l">
             Pin Board
-        </p>
+        </NavLink >
     </nav>
   </div>
   );
 }
 
-export default Nevigation;
+// const mapStateToProps = state =>{
+//     return {
+        
+//     }
+// }
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        onLogout: () => dispatch(logout())
+    }
+}
+
+export default connect(null,mapDispatchToProps)(Nevigation);

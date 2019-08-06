@@ -11,23 +11,21 @@ class Groceries extends Component {
     state={
         modalIsOpen:false
     }
-    // componentDidMount(){
-    //     this.props.initGroceriesList()
-    // }
+    componentDidMount(){
+        // this.props.initGroceriesList()
+    }
     
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
+    openModal() {
+        this.setState({modalIsOpen: true});
+    }
  
-  closeModal() {
-    this.setState({modalIsOpen: false});
-  }
-  
- 
+    closeModal() {
+        this.setState({modalIsOpen: false});
+    }
 
     render(){
         let list = <Spinner/>
-        if(!this.props.loading){
+        if(!this.props.loadingAuth){
             list =(
                 <div>
                     <AddGrocerie modalIsOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)}  />
@@ -45,7 +43,10 @@ class Groceries extends Component {
 const mapStateToProps = (state) =>{
     return {
         groceriesList:state.groceries.groceriesList,
-        loading:state.groceries.loading
+        loading:state.groceries.loading,
+        loadingAuth:state.auth.loading,
+        token:state.auth.token,
+        flatId:state.auth.flatId
     }
 }
 
@@ -53,7 +54,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = dispatch =>{
     return{
         onCheck: (id)=> dispatch(actionsCreators.checkItem(id)),
-        initGroceriesList: () =>dispatch(initGroceries())
+        initGroceriesList: (token) =>dispatch(initGroceries(token))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Groceries)

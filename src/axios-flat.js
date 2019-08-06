@@ -1,5 +1,8 @@
 import axios from 'axios'
 
-export default axios.create({
-    baseURL:'https://flat-d00f8.firebaseio.com/'
+const axios_flat = axios.create({
+    baseURL: 'https://flat-d00f8.firebaseio.com/'
 })
+
+
+export default axios_flat

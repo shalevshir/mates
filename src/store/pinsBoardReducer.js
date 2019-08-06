@@ -1,5 +1,4 @@
 import * as actionsTypes from './actions/actionTypes'
-import { stat } from 'fs';
 
 const initialState = {
     pinsList:[

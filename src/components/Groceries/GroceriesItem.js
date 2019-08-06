@@ -6,14 +6,20 @@ const GroceriesItem = (props) =>{
     return(
         <div className="flex items-center ml6 pl5">
             <input className="mr3 mt1" type="checkbox" checked={props.item.isBought} id={props.item.id} value={props.item.product} onChange={()=>{props.onCheck(props.item.id)}}/>
-            <label className={props.item.isBought?'strike ':null} onClick={()=>{props.onCheck(props.item.id)}}>{props.item.product}</label>
+            <label className={props.item.isBought?'strike ':null} onClick={()=>{props.onCheck(props.item.id,props.token, props.flatId)}}>{props.item.product}</label>
         </div>
     )
 }
 
-const mapDispatchToProps = (dispatch) =>{
+const mapStateToProps = state =>{
     return{
-        onCheck: (id)=> dispatch(GroceriesActions.checkItem(id))
+        token:state.auth.token,
+        flatId:state.auth.flatId
     }
 }
-export default connect(null,mapDispatchToProps)(GroceriesItem)
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        onCheck: (id, token, flatId)=> dispatch(GroceriesActions.checkItem(id,token, flatId))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(GroceriesItem)

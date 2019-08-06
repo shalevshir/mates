@@ -1,22 +1,22 @@
 import React from 'react'
 import GroceriesItem from './GroceriesItem'
 import {connect} from 'react-redux'
-import * as actionTypes from '../../store/actions/actionTypes'
 import { initGroceries } from '../../store/actions/groceries'
 
 class GroceriesList extends React.Component{
-    
+    componentDidMount(){
+        console.log(this.props.list.length)
+        if(this.props.list.length===0){
+            this.props.initGroceriesList(this.props.token,this.props.flatId)
+        }
+    }
+
+
     render(){
         return(
             <fieldset id="ma5" className="bn ">
             {
-                
-                this.props.list.map((product)=>{
-                if(!product.isBought){
-                    return <GroceriesItem key= {product.id} item={product}/>
-                }
-                return null
-                })
+                this.props.list.map((product)=> !product.isBought?<GroceriesItem key= {product.id} item={product}/>: null)
             }
             </fieldset>
         )
@@ -26,13 +26,14 @@ class GroceriesList extends React.Component{
 const mapStateToProps = (state) =>{
     return{
         list:state.groceries.groceriesList,
-        loading:state.groceries.loading
+        token:state.auth.token,
+        flatId:state.auth.flatId
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        initGroceriesList: () =>dispatch(initGroceries())
+        initGroceriesList: (token, flatId) =>dispatch(initGroceries(token, flatId))
     }
 }
 
