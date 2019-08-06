@@ -18,14 +18,8 @@ import pinsBoardReducer from './store/pinsBoardReducer'
 import authReducer from './store/authReducer'
 import groceriesReducer from './store/groceriesReducer'
 
-<<<<<<< HEAD
 JavascriptTimeAgo.locale(en)
-
-
-const reducer = combineReducers({bills:billsReducer,flat:flatReducer,pins:pinsBoardReducer,groceries:groceriesReducer,auth:authReducer})
-=======
 const reducer = combineReducers({bills:billsReducer,mates:matesReducer,pins:pinsBoardReducer,groceries:groceriesReducer,auth:authReducer})
->>>>>>> 2bec46774859221356e2e66a188af0a88af98677
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 
