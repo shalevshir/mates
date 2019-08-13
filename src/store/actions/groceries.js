@@ -29,16 +29,18 @@ const addGroceryFail = () =>{
 export const addGrocery =(input)=>{
     return async (dispatch, getState) =>{
         dispatch(addGroceryStart())
+        const flatId = getState().auth.flatId
+        const token = getState().auth.token
         try {
             const duplicate = getState().groceries.groceriesList.find(item=>item.product===input)
             console.log(duplicate)
             if(duplicate && duplicate.isBought){
-                dispatch(checkItem(duplicate.id))
+                dispatch(checkItem(duplicate.id, token, flatId))
             }else if(duplicate && !duplicate.isBought){
                 alert('Item is aleady on the list')
                 dispatch(addGroceryFail())
             }else{
-                const res = await axios.post(getState().auth.flatId + `/groceriesList.json?auth=` + getState().auth.token,{isBought:false,product:input})
+                const res = await axios.post(flatId + `/groceriesList.json?auth=` + token,{isBought:false,product:input})
                 dispatch(addGrocerySuccess(res.data.name, input))
             }
         } catch (error) {
@@ -65,7 +67,6 @@ const fetchFail = () =>{
 
 export const initGroceries = (token, flatId) =>{
     return async (dispatch, getState) =>{
-        // const flatId = getState().auth.flatId
 
             dispatch(fetchStart())
             try {

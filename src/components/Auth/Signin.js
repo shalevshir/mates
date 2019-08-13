@@ -26,7 +26,7 @@ class Signin extends Component{
       errorMessage = this.props.error.message
     }
     let form = (
-    <div>
+    <div className = 'App'>
       <article className="pa4 black-80">
         <form onSubmit={this.handleSubmit} action="sign-up_submit" method="get" acceptCharset="utf-8">
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">

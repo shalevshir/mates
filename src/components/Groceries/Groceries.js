@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import Spinner from '../spinner'
 import { initGroceries } from '../../store/actions/groceries'
 
+
 class Groceries extends Component {
     state={
         modalIsOpen:false
@@ -32,7 +33,7 @@ class Groceries extends Component {
                     <GroceriesList/>
                     <hr className='ma0 pa0-ns'></hr>
                     <GroceriesListBought list={this.state.groceriesList}/>
-                    <button onClick={this.openModal.bind(this)}>Add</button>
+                    
                 </div>
             )
         }
