@@ -14,24 +14,31 @@ class App extends React.Component {
     console.log('App did mount')
   }
 
+  
   render (){
-    return(
-      <BrowserRouter>
-        <div className="App">
-        {this.props.isSignedIn?
-          <div>
+    let layout = (
+        <Signin/>
+    )
+    if(this.props.isSignedIn){
+      
+    }
+    if(this.props.flatId){
+      layout = (
+        <BrowserRouter>
+        <div className='App'>
           <Nevigation/>
-          <MainWindow /></div>
-        :<Signin/>
-        }
-
+          <MainWindow />
         </div>
-      </BrowserRouter>
-  );
+        </BrowserRouter>
+      )
+
+    }
+    return layout;
 }}
 const mapStateToProps = state =>{
   return{
-    isSignedIn: state.auth.token !== null
+    isSignedIn: state.auth.token !== null,
+    flatId:state.auth.flatId
   }
 }
 

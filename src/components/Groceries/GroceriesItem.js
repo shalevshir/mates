@@ -5,7 +5,7 @@ import * as GroceriesActions from '../../store/actions/groceries'
 const GroceriesItem = (props) =>{
     return(
         <div className="flex items-center ml6 pl5">
-            <input className="mr3 mt1" type="checkbox" checked={props.item.isBought} id={props.item.id} value={props.item.product} onChange={()=>{props.onCheck(props.item.id)}}/>
+            <input className="mr3 mt1" type="checkbox" checked={props.item.isBought} id={props.item.id} value={props.item.product} onChange={()=>{props.onCheck(props.item.id,props.token, props.flatId)}}/>
             <label className={props.item.isBought?'strike ':null} onClick={()=>{props.onCheck(props.item.id,props.token, props.flatId)}}>{props.item.product}</label>
         </div>
     )
