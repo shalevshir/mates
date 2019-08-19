@@ -45,7 +45,7 @@ class PinBoard extends React.Component {
             <div>
                 {openAddPinModal}
                 <AddPin modalIsOpen={this.state.modalIsOpen} closeModal={this.closeModal.bind(this)} />
-                <PinsList list={this.state.pinsList} onRemovePin={(pinId) =>this.onRemovePin(pinId)}/>
+                <PinsList list={this.props.pinsList} onRemovePin={(pinId) =>this.onRemovePin(pinId)}/>
                 
             </div>
         )
@@ -61,7 +61,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         token: state.auth.token,
-        flatId: state.auth.flatId
+        flatId: state.auth.flatId,
+        pinsList: state.pins.pinsList
     }
 }
 

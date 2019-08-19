@@ -8,7 +8,7 @@ const PinsList = (props) =>  {
     return (
         <div className="flex flex-wrap">
             {props.list.map(pin => {
-                return (pin.showPin?<Pin pin={pin} key={pin.id}/>:null)
+                return (<Pin pin={pin} key={pin.id}/>)
             })}
         </div>
     )

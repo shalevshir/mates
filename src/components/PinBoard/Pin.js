@@ -36,7 +36,7 @@ const Pin = (props) =>  {
                 <p className="f6 lh-copy measure mt2 mid-gray">{props.pin.body}</p>
             </div>
             <div>
-                <div>Pinned {pinnedBefore(props.pin.date)}</div>
+                <div>Pinned {pinnedBefore(props.pin.pinnedAt)}</div>
                 <button className="b input-reset ba b--black bg-transparent grow pointer " onClick={() => props.onRemoveItem(props.pin.id)} >X</button>
             </div>
         </div>

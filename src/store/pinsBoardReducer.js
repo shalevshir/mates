@@ -2,7 +2,9 @@ import * as actionsTypes from './actions/actionTypes'
 
 
 const initialState = {
-    pinsList:[]
+    pinsList:[],
+    loading:false,
+    error:false
 }
 
 const removePin = (state, action) => {
@@ -30,9 +32,12 @@ const addPin = (state, action) => {
     return {...state, pinsList: state.pinsList.concat(newPin)} 
 }
 
-const fetchPins = (state, action) => {
-    // const pinsList = 
-    return {...state} 
+const fetchPinsStart = (state, action) => {
+    return {...state, loading:true} 
+}
+
+const fetchPinsSuccess = (state, action) => {
+    return {...state, pinsList:action.list, loading: false}
 }
 
 const pinsBoardReducer = (state=initialState, action)=> {
@@ -42,7 +47,9 @@ const pinsBoardReducer = (state=initialState, action)=> {
         case actionsTypes.ADD_PIN:
             return addPin(state, action);
         case actionsTypes.FETCH_PINS_START:
-            return fetchPins(state, action);
+            return fetchPinsStart(state, action);
+        case actionsTypes.FETCH_PINS_SUCCESS:
+            return fetchPinsSuccess(state, action)
         default :
          return state
     }
