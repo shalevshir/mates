@@ -24,10 +24,14 @@ class AddPin extends React.Component {
 
     addPin(e){
       e.preventDefault()
-      console.log(this.refs)
       const newPin= {
-          title: this.refs.title.value,
-          body: this.refs.body.value}      
+        id: new Date(),
+        date: new Date(),
+        location: "tel aviv",
+        mate: this.auth.userId,
+        body: this.refs.body.value,
+        attachments: "picture or file of something"
+      }      
         this.props.onAdd(newPin,this.props.closeModal)
     }
 
@@ -40,13 +44,11 @@ class AddPin extends React.Component {
             this.addPin()
             // this.props.onAdd(e.target.grocery.value,this.props.closeModal)
           }}>
-          <h2 ref={subtitle => this.subtitle = subtitle}>Add a pin to the board</h2>
-          <button onClick={this.props.closeModal}>close</button>
-          <div>Title:</div>
-            <input ref='title' type="text"/>
-          <div>Pin Text(body):</div>
+          <h2 ref={subtitle => this.subtitle = subtitle}>{`Hello ${this.props.mate}!`}</h2>
+          <div> what's on your mind?:</div>
             <input ref='body' type="text"/>
             <button onClick={(e)=>this.addPin(e)}>Add</button>
+            <button onClick={this.props.closeModal}>close</button>
         </form>
 
           return (
@@ -74,5 +76,10 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    mate: state.auth.userId
+  }
+}
 
-export default connect(null, mapDispatchToProps)(AddPin)
+export default connect(mapStateToProps, mapDispatchToProps)(AddPin)

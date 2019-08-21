@@ -17,7 +17,6 @@ export const FETCH_START = 'FETCH_START'
 export const FETCH_FAIL ='FETCH_FAIL'
 
 export const REMOVE_PIN= 'REMOVE_PIN'
-export const ADD_PIN= 'ADD_PIN'
 
 export const FETCH_MATES = 'FETCH_MATES'
 export const FETCH_MATES_START = 'FETCH_MATES_START'
@@ -31,6 +30,11 @@ export const FETCH_FLAT_SUCCESS = 'FETCH_FLAT_SUCCESS'
 export const FETCH_PINS_START = 'FETCH_PINS_START'
 export const FETCH_PINS_SUCCESS = 'FETCH_PINS_SUCCESS'
 export const FETCH_PINS_FAIL = 'FETCH_PINS_FAIL'
+
+export const ADD_PIN_START = 'ADD_PIN_START'
+export const ADD_PIN_SUCCESS = 'ADD_PIN_SUCCESS'
+export const ADD_PIN_FAIL = 'ADD_PIN_FAIL'
+
 export const ADD_MATE_START = 'ADD_MATE_START'
 export const ADD_MATE_FAIL = 'ADD_MATE_FAIL'
 export const ADD_MATE_SUCCESS = 'ADD_MATE_SUCCESS'

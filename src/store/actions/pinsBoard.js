@@ -3,9 +3,16 @@ import axios from '../../axios-flat'
 
 export const addPin = (newPin)=>{
     return (dispatch)=> {
-        dispatch({type: actionTypes.ADD_PIN, pin: newPin})
+        dispatch(addPinStart())
+        
+        dispatch({type: actionTypes.ADD_PIN_SUCCESS, pin: newPin})
     }
 }
+
+const addPinStart = () => {
+    return {type:actionTypes.ADD_PIN_START}
+}
+
 
 const initPinsStart = () => {
     return ({type: actionTypes.FETCH_PINS_START})
